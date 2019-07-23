@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Modal, Comment as CommentUI, Header } from 'semantic-ui-react';
 import moment from 'moment';
-import { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment } from 'src/containers/Thread/actions';
+import { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment, dislikePost } from 'src/containers/Thread/actions';
 import Post from 'src/components/Post';
 import Comment from 'src/components/Comment';
 import AddComment from 'src/components/AddComment';
@@ -35,6 +35,8 @@ class ExpandedPost extends React.Component {
                                 likePost={props.likePost}
                                 toggleExpandedPost={props.toggleExpandedPost}
                                 sharePost={sharePost}
+                                dislikePost={props.dislikePost}
+                                deletePostById={props.deletePostById}
                             />
                             <CommentUI.Group style={{ maxWidth: '100%' }}>
                                 <Header as="h3" dividing>
@@ -68,7 +70,7 @@ const mapStateToProps = rootState => (
     post: rootState.posts.expandedPost,
     userId: rootState.profile.user.id
 });
-const actions = { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment, showPage };
+const actions = { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment, showPage, dislikePost };
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
