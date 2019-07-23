@@ -1,0 +1,9 @@
+.email-input .error {
+    border: 1px red solid;
+}
+
+.email-input .error-message {
+    color: red;
+    display: block;
+    margin-left: 125px;
+}

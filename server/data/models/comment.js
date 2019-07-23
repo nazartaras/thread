@@ -5,8 +5,9 @@ export default (orm, DataTypes) => {
             type: DataTypes.TEXT
         },
         createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE
-    }, {});
+        updatedAt: DataTypes.DATE,
+        deletedAt: DataTypes.DATE
+    }, {paranoid:true});
 
     return Comment;
 };

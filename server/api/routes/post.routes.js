@@ -24,6 +24,20 @@ router
             }
             return res.send(reaction);
         })
-        .catch(next));
-
+        .catch(next))
+    .get('/react/:id', (req, res, next) => postService.getPostReactionById(req.user.id, req.params.id)
+    .then(post => res.send(post))
+    .catch(next))
+    .delete('/:id', (req, res, next) => postService.deletePostById(req.params.id)
+    .then(res.send('deleted'))
+    .catch(next))
+    .get('/liked', (req,res,next)=>postService.getLikedPostsId()
+    .then(post => res.send(post))
+    .catch(next))
+    .get('/restore/:id', (req, res, next) => postService.restorePostById(req.params.id)
+    .then(res.send('restored'))
+    .catch(next))
+    .put('/',(req, res, next) => postService.updatePost(req.user.id, req.body.id, req.body.text) // user added to the request in the jwt strategy, see passport config
+    .then(res.send('updated'))
+    .catch(next));
 export default router;

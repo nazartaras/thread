@@ -11,6 +11,10 @@ import { createBrowserHistory } from 'history';
 
 import threadReducer from './containers/Thread/reducer';
 import profileReducer from './containers/Profile/reducer';
+import editPostReducer from './components/EditPost/reducer';
+import editCommentReducer from './components/EditComment/reducer';
+import editProfileReducer from './components/EditProfile/reducer';
+
 
 export const history = createBrowserHistory();
 
@@ -28,6 +32,9 @@ const composedEnhancers = compose(
 const reducers = {
     posts: threadReducer,
     profile: profileReducer,
+    editPost: editPostReducer,
+    editComment: editCommentReducer,
+    editProfile: editProfileReducer
 };
 
 const rootReducer = combineReducers({

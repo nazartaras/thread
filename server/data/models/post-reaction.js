@@ -5,6 +5,11 @@ export default (orm, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
+        isDislike: {
+            allowNull: false,
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
     }, {});

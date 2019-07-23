@@ -1,5 +1,6 @@
-import { CommentModel, UserModel, ImageModel } from '../models/index';
+import { CommentModel, UserModel, ImageModel, CommentReactionModel } from '../models/index';
 import BaseRepository from './base.repository';
+import sequelize from '../db/connection';
 
 class CommentRepository extends BaseRepository {
     getCommentById(id) {
@@ -19,6 +20,22 @@ class CommentRepository extends BaseRepository {
                 }
             }]
         });
+    }
+    deleteCommentById(id){
+        return this.model.destroy({
+            where: { id },
+            paranoid: true,
+            timestamps: true
+        });
+    }
+    updateComment(id,text){
+        return this.model.update({body:text}, {where:{id:id}})
+    }
+    restoreCommentById(id){
+        return this.model.restore({
+            where:{id}
+        }
+        );
     }
 }
 

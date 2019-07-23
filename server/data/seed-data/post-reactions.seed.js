@@ -8,3 +8,4 @@ export default new Array(25)
         createdAt: now,
         updatedAt: now
     }));
+

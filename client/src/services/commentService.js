@@ -16,3 +16,28 @@ export const getComment = async (id) => {
     });
     return response.json();
 };
+
+export const deleteComment = async (id) => {
+    const response = await callWebApi({
+        endpoint: `/api/comments/${id}`,
+        type: 'DELETE'
+    });
+    return response;
+};
+
+export const updateComment = async (request) => {
+    const response = await callWebApi({
+        endpoint: `/api/comments`,
+        type: 'PUT',
+        request
+    });
+    return response;
+};
+
+export const restoreCommentById = async (commentId) => {
+    const response = await callWebApi({
+        endpoint: `/api/comments/restore/${commentId}`,
+        type: 'GET'
+    });
+    return response;
+};

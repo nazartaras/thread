@@ -4,11 +4,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Modal, Comment as CommentUI, Header } from 'semantic-ui-react';
 import moment from 'moment';
-import { likePost, toggleExpandedPost, addComment } from 'src/containers/Thread/actions';
+import { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment } from 'src/containers/Thread/actions';
 import Post from 'src/components/Post';
 import Comment from 'src/components/Comment';
 import AddComment from 'src/components/AddComment';
 import Spinner from 'src/components/Spinner';
+import { showPage } from  '../../components/EditComment/actions'
+import  EditComment  from '../../components/EditComment';
 
 class ExpandedPost extends React.Component {
     state = {
@@ -20,9 +22,11 @@ class ExpandedPost extends React.Component {
     }
 
     render() {
-        const { post, sharePost, ...props } = this.props;
+        const { post, sharePost, userId, ...props } = this.props;
+        console.log(post);
         return (
             <Modal dimmer="blurring" centered={false} open={this.state.open} onClose={this.closeModal}>
+                <EditComment></EditComment>
                 {post
                     ? (
                         <Modal.Content>
@@ -38,9 +42,9 @@ class ExpandedPost extends React.Component {
                                 </Header>
                                 {post.comments && post.comments
                                     .sort((c1, c2) => moment(c1.createdAt).diff(c2.createdAt))
-                                    .map(comment => <Comment key={comment.id} comment={comment} />)
+                                    .map(comment =><Comment onRestore={props.restoreComment} onEdit={props.showPage} onDelete={props.deleteComment}key={comment.id} comment={comment} currUser={userId}/>)
                                 }
-                                <AddComment postId={post.id} addComment={props.addComment} />
+                                <AddComment postId={post.id} addComment={props.addComment}/>
                             </CommentUI.Group>
                         </Modal.Content>
                     )
@@ -59,10 +63,12 @@ ExpandedPost.propTypes = {
     sharePost: PropTypes.func.isRequired
 };
 
-const mapStateToProps = rootState => ({
-    post: rootState.posts.expandedPost
+const mapStateToProps = rootState => (
+    {
+    post: rootState.posts.expandedPost,
+    userId: rootState.profile.user.id
 });
-const actions = { likePost, toggleExpandedPost, addComment };
+const actions = { likePost, toggleExpandedPost, addComment, deleteComment, restoreComment, showPage };
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 

@@ -6,13 +6,15 @@ const Post = orm.import('./post');
 const PostReaction = orm.import('./post-reaction');
 const Comment = orm.import('./comment');
 const Image = orm.import('./image');
+const CommentReaction = orm.import('./comment-reaction');
 
 associate({
     User,
     Post,
     PostReaction,
     Comment,
-    Image
+    Image,
+    CommentReaction
 });
 
 export {
@@ -20,5 +22,6 @@ export {
     Post as PostModel,
     PostReaction as PostReactionModel,
     Comment as CommentModel,
-    Image as ImageModel
+    Image as ImageModel,
+    CommentReaction as CommentReactionModel
 };

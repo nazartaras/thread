@@ -14,8 +14,10 @@ const Header = ({ user, logout }) => (
                     <NavLink exact to="/profile">
                         <HeaderUI>
                             <Image circular src={getUserImgLink(user.image)} />
-                            {' '}
+                            <div>
                             {user.username}
+                            <br/>
+                            <span style={{fontSize:'0.7em', fontWeight:'normal'}}>status:{user.status}</span></div>
                         </HeaderUI>
                     </NavLink>
                 )}
